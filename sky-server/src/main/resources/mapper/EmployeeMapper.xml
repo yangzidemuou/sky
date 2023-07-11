@@ -4,4 +4,7 @@
 <mapper namespace="com.sky.mapper.EmployeeMapper">
 
 
+    <select id="getByUsername" resultType="com.sky.entity.Employee">
+     select * from employee where username=#{username};
+    </select>
 </mapper>
