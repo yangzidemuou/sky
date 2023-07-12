@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.ResultSet;
 import java.util.HashMap;
 
 /**
@@ -36,6 +37,8 @@ public class EmployeeController {
     @PostMapping("/login")
     @ApiOperation("员工登录")
     public Result login(@RequestBody EmployeeDTO employeeDTO){
+
+        log.info("员工登录:{}",employeeDTO.getUsername());
         Employee employee = employeeService.login(employeeDTO);
 
         EmployeeLoginVO vo = BeanUtil.copyProperties(employee,EmployeeLoginVO.class);
@@ -46,6 +49,24 @@ public class EmployeeController {
         vo.setToken(token);
         return Result.success(vo);
     }
+
+    @PostMapping("/logout")
+    @ApiOperation("员工退出")
+    public Result<String> logout(){
+        return Result.success();
+    }
+
+
+
+    @PostMapping
+    @ApiOperation("新增员工")
+    public Result save(@RequestBody EmployeeDTO employeeDTO){
+        log.info("新增员工:{}",employeeDTO);
+        employeeService.save(employeeDTO);
+        return Result.success();
+    }
+
+
 
 
 }
