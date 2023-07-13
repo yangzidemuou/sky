@@ -13,11 +13,13 @@ import com.sky.exception.BusinessException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.result.PageResult;
 import com.sky.service.EmployeeService;
+import jdk.dynalink.linker.LinkerServices;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -82,11 +84,11 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
-
         PageHelper.startPage(employeePageQueryDTO.getPage(),employeePageQueryDTO.getPageSize());
 
         Page<Employee> page= employeeMapper.pageQuery(employeePageQueryDTO);
-
-        return null;
+        long total = page.getTotal();
+        List<Employee> records = page.getResult();
+        return new PageResult(total,records);
     }
 }
