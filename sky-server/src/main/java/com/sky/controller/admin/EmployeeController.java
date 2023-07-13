@@ -2,7 +2,6 @@ package com.sky.controller.admin;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.sky.dto.EmployeeDTO;
-import com.sky.dto.EmployeeLoginDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
 import com.sky.result.Result;
@@ -17,10 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.sql.ResultSet;
 import java.util.HashMap;
-
 /**
  * 员工管理
  */
@@ -56,8 +52,6 @@ public class EmployeeController {
         return Result.success();
     }
 
-
-
     @PostMapping
     @ApiOperation("新增员工")
     public Result save(@RequestBody EmployeeDTO employeeDTO){
@@ -65,8 +59,6 @@ public class EmployeeController {
         employeeService.save(employeeDTO);
         return Result.success();
     }
-
-
 
 
 }

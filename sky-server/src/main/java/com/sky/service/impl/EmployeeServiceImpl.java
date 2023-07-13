@@ -3,6 +3,7 @@ package com.sky.service.impl;
 import cn.hutool.crypto.SecureUtil;
 import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
+import com.sky.context.ThreadLocalUtil;
 import com.sky.dto.EmployeeDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.BusinessException;
@@ -64,8 +65,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setUpdateTime(LocalDateTime.now());
 
         //设置当前记录的创建人id 和修改人id
-        employee.setUpdateUser(10L);
-        employee.setCreateUser(10L);
+        employee.setUpdateUser(ThreadLocalUtil.getCurrentId());
+        employee.setCreateUser(ThreadLocalUtil.getCurrentId());
 
         employeeMapper.insert(employee);
     }
