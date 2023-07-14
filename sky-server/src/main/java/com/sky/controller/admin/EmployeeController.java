@@ -29,6 +29,12 @@ public class EmployeeController {
 
     @Autowired
     JwtProperties jwtProperties;
+
+    /**
+     * 员工登录
+     * @param employeeDTO
+     * @return
+     */
     @PostMapping("/login")
     @ApiOperation("员工登录")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeDTO employeeDTO){
@@ -45,12 +51,21 @@ public class EmployeeController {
         return Result.success(vo);
     }
 
+    /**
+     * 员工退出
+     * @return
+     */
     @PostMapping("/logout")
     @ApiOperation("员工退出")
     public Result<String> logout(){
         return Result.success();
     }
 
+    /**
+     * 新增员工
+     * @param employeeDTO
+     * @return
+     */
     @PostMapping
     @ApiOperation("新增员工")
     public Result<String> save(@RequestBody EmployeeDTO employeeDTO){
@@ -59,6 +74,11 @@ public class EmployeeController {
         return Result.success();
     }
 
+    /**
+     * 员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){

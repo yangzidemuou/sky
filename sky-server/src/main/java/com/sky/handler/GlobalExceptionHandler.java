@@ -4,8 +4,6 @@ import com.sky.constant.MessageConstant;
 import com.sky.exception.BusinessException;
 import com.sky.result.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.config.MessageConstraints;
-import org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -50,7 +48,7 @@ public class GlobalExceptionHandler {
     public Result handlerException(Exception e){
         e.printStackTrace();
         //1. 记录日志-开发看
-        log.error("程序出现未知异常：{}",e);
+        log.error("程序出现未知异常：{}",e.getMessage());
         //2. 返回友好提示-用户看
         return Result.error(500,"服务器异常，请联系管理员");
     }
