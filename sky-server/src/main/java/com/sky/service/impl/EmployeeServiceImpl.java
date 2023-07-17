@@ -90,6 +90,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return new PageResult(total,records);
     }
 
+    /**
+     * 修改员工状态
+     * @param status
+     * @param id
+     */
     @Override
     public void StatusChange(Integer status, Long id) {
         Employee employee=Employee.builder()
@@ -97,6 +102,17 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .id(id)
                 .build();
         employeeMapper.update(employee);
+    }
+
+    /**
+     *通过员工id查询员工信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee SelectEmployeeById(Long id) {
+        Employee employee = employeeMapper.SelectEmployeeById(id);
+        return employee;
     }
 
 
