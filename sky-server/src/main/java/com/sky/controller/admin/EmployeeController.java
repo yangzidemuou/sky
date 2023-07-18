@@ -114,11 +114,23 @@ public class EmployeeController {
         return Result.success(employee);
     }
 
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     * @return
+     */
     @PutMapping
     @ApiOperation("修改员工信息")
     public Result update(@RequestBody EmployeeDTO employeeDTO){
         log.info("编辑员工信息:{}",employeeDTO);
         employeeService.update(employeeDTO);
+        return Result.success();
+    }
+    @PutMapping
+    @ApiOperation("修改员工密码")
+    public Result updatePassword(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工密码：{}",employeeDTO);
+        employeeService.updatePassword(employeeDTO);
         return Result.success();
     }
 

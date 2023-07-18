@@ -41,5 +41,11 @@ public interface EmployeeService {
      * @param employeeDTO
      */
     void update(EmployeeDTO employeeDTO);
+
+    /**
+     * 修改员工密码
+     * @param employeeDTO
+     */
+    void updatePassword(EmployeeDTO employeeDTO);
 }
 
