@@ -119,7 +119,7 @@ public class EmployeeController {
      * @param employeeDTO
      * @return
      */
-    @PutMapping
+    @PutMapping("/editPassword")
     @ApiOperation("修改员工信息")
     public Result update(@RequestBody EmployeeDTO employeeDTO){
         log.info("编辑员工信息:{}",employeeDTO);

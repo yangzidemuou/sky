@@ -5,7 +5,7 @@ import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import com.sky.result.PageResult;
 
-import javax.print.attribute.IntegerSyntax;
+
 
 public interface EmployeeService {
     Employee login(EmployeeDTO employeeDTO);
