@@ -24,4 +24,10 @@ public interface CategoryService {
      * @param id
      */
     void startAndStopCategory(Integer status, Long id);
+
+    /**
+     * 根据id删除分类
+     * @param id
+     */
+    void deleteCategory(Long id);
 }

@@ -29,6 +29,7 @@ public class categoryController {
     @GetMapping("/page")
     @ApiOperation("分页查询分类数据")
     public Result<PageResult> page(CategoryDTO categoryDTO){
+        log.info("分页数据查询:{}",categoryDTO);
         PageResult pageResult = categoryService.page(categoryDTO);
         return Result.success(pageResult);
     }
@@ -68,6 +69,14 @@ public class categoryController {
     private Result startAndStopCategory(@PathVariable Integer status,Long id){
         log.info("启用禁用分类");
         categoryService.startAndStopCategory(status,id);
+        return Result.success();
+    }
+
+    @DeleteMapping
+    @ApiOperation("根据id删除分类")
+    private Result deleteCategory(Long id){
+        log.info("根据id查询分类:{}",id);
+        categoryService.deleteCategory(id);
         return Result.success();
     }
 
