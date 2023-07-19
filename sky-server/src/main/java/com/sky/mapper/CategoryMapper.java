@@ -13,4 +13,6 @@ public interface CategoryMapper {
      * @return
      */
     Page<Category> pageQuery(CategoryDTO categoryDTO);
+
+    void insert(Category category);
 }
