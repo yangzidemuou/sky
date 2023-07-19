@@ -72,6 +72,11 @@ public class categoryController {
         return Result.success();
     }
 
+    /**
+     * 根据id删除分类
+     * @param id
+     * @return
+     */
     @DeleteMapping
     @ApiOperation("根据id删除分类")
     private Result deleteCategory(Long id){
@@ -79,6 +84,11 @@ public class categoryController {
         categoryService.deleteCategory(id);
         return Result.success();
     }
-
-
+    @GetMapping("/list")
+    @ApiOperation("根据id查询分类信息")
+    private Result<PageResult> selectCategoryByType(Integer type){
+        log.info("根据id查询分类信息:{}",type);
+        PageResult pageResult = categoryService.selectCategoryByType(type);
+        return Result.success(pageResult);
+    }
 }

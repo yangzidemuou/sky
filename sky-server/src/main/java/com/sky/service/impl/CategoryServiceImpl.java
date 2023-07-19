@@ -5,18 +5,14 @@ import com.github.pagehelper.PageHelper;
 import com.sky.context.ThreadLocalUtil;
 import com.sky.dto.CategoryDTO;
 import com.sky.entity.Category;
-import com.sky.entity.Employee;
 import com.sky.mapper.CategoryMapper;
 import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
-
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
@@ -90,5 +86,18 @@ public class CategoryServiceImpl implements CategoryService {
                 .updateUser(ThreadLocalUtil.getCurrentId())
                 .build();
         categoryMapper.delete(category);
+    }
+
+    /**
+     * 根据type查询分类信息
+     * @param type
+     * @return
+     */
+    @Override
+    public PageResult selectCategoryByType(Integer type) {
+
+
+
+        return null;
     }
 }

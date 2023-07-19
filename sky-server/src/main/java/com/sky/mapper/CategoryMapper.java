@@ -25,7 +25,6 @@ public interface CategoryMapper {
      * @param category
      */
     void update(Category category);
-
     /**
      * 删除分类
      * @param category

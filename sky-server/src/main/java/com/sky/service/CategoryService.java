@@ -30,4 +30,11 @@ public interface CategoryService {
      * @param id
      */
     void deleteCategory(Long id);
+
+    /**
+     * 根据type查询分类信息
+     * @param type
+     * @return
+     */
+    PageResult selectCategoryByType(Integer type);
 }
