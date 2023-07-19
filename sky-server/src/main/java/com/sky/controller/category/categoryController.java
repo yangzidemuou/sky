@@ -59,5 +59,17 @@ public class categoryController {
         return Result.success();
     }
 
+    /**
+     * 修改分类状态
+     * @return
+     */
+    @PostMapping("status/{status}")
+    @ApiOperation("分类状态修改")
+    private Result startAndStopCategory(@PathVariable Integer status,Long id){
+        log.info("启用禁用分类");
+        categoryService.startAndStopCategory(status,id);
+        return Result.success();
+    }
+
 
 }

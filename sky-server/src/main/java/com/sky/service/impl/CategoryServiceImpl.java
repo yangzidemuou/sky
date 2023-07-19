@@ -61,4 +61,20 @@ public class CategoryServiceImpl implements CategoryService {
         category.setUpdateUser(ThreadLocalUtil.getCurrentId());
         categoryMapper.update(category);
     }
+
+    /**
+     * 修改分类状态
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startAndStopCategory(Integer status, Long id) {
+        Category category=Category.builder()
+                .status(status)
+                .id(id)
+                .updateTime(LocalDateTime.now())
+                .updateUser(ThreadLocalUtil.getCurrentId())
+                .build();
+        categoryMapper.update(category);
+    }
 }
