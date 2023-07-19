@@ -46,5 +46,11 @@ public class categoryController {
         return Result.success();
     }
 
+    private Result changeCategory(@RequestBody CategoryDTO categoryDTO){
+        log.info("修改分类:{}",categoryDTO);
+        categoryService.changeCategory(categoryDTO);
+        return Result.success();
+    }
+
 
 }

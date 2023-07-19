@@ -11,4 +11,7 @@ public interface CategoryService {
      * @param categoryDTO
      */
     void addCategory(CategoryDTO categoryDTO);
+
+    void changeCategory(CategoryDTO categoryDTO);
+
 }

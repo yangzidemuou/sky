@@ -8,6 +8,22 @@
         values(#{type},#{name},#{sort},'0',#{updateUser},#{updateTime});
     </insert>
 
+
+    <update id="update">
+        update category
+        <set>
+            <if test="type !=null">set type=#{type},</if>
+            <if test="name !=null">set name=#{name},</if>
+            <if test="sort !=null">set sort=#{sort},</if>
+            <if test="status !=null">set status=#{status},</if>
+            <if test="createTime !=null">set create_time=#{createTime},</if>
+            <if test="updateTime !=null">set update_time=#{updateTime},</if>
+            <if test="createUser !=null">set create_user=#{createUser},</if>
+            <if test="updateUser !=null">set update_user=#{updateUser},</if>
+        </set>
+        where id=#{id}
+    </update>
+
     <select id="pageQuery" resultType="com.sky.entity.Category">
         select * from category
         <where>
