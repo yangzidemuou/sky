@@ -40,8 +40,6 @@ public class setmealServiceImpl implements setmealService{
      */
     @Override
     public void add(SetmealDTO setmealDTO) {
-        Setmeal setmeal=new Setmeal();
-        BeanUtils.copyProperties(setmealDTO,setmeal);
-        setmealMapper.add(setmeal);
+        setmealMapper.add(setmealDTO);
     }
 }

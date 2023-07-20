@@ -12,5 +12,5 @@ public interface setmealMapper {
 
     Page<SetmealVO> pageQuery(SetmealPageDTO setmealPageDTO);
 
-    void add(Setmeal setmeal);
+    void add(SetmealDTO setmealDTO);
 }
