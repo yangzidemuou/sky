@@ -6,11 +6,10 @@ import com.sky.result.Result;
 import com.sky.service.DishService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 分类管理
@@ -31,6 +30,20 @@ public class DishController {
         log.info("分页查询菜品数据");
         PageResult pageResult=dishService.page(dishPageDTO);
         return Result.success(pageResult);
+    }
+
+    /**
+     * 菜品起售停售
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("菜品起售停售")
+    private Result startAndStopDish(@PathVariable Integer status,Long id){
+        log.info("菜品起售停售：{}  {}",status,id);
+        dishService.startAndStopDish(status,id);
+        return Result.success();
     }
 
 

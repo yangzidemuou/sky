@@ -15,5 +15,7 @@ public interface DishMapper {
      */
     Page<DishVO> pageQuery(DishPageDTO dishPageDTO);
 
+    void update(Dish dish);
+
 }
 

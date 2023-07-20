@@ -10,4 +10,11 @@ public interface DishService {
      * @return
      */
     PageResult page(DishPageDTO dishPageDTO);
+
+    /**
+     * 菜品起售停售
+     * @param status
+     * @param id
+     */
+    void startAndStopDish(Integer status, Long id);
 }
