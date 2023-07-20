@@ -4,8 +4,8 @@
 <mapper namespace="com.sky.mapper.CategoryMapper">
 
     <insert id="insert">
-        insert into category(type,name,sort,status,update_user,update_time)
-        values(#{type},#{name},#{sort},'0',#{updateUser},#{updateTime});
+        insert into category(type,name,sort,status,create_user,create_time)
+        values(#{type},#{name},#{sort},'0',#{createUser},#{createTime});
     </insert>
 
 

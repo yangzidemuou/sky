@@ -40,8 +40,8 @@ public class CategoryServiceImpl implements CategoryService {
     public void addCategory(CategoryDTO categoryDTO) {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDTO,category);
-        category.setUpdateTime(LocalDateTime.now());
-        category.setUpdateUser(ThreadLocalUtil.getCurrentId());
+        category.setCreateTime(LocalDateTime.now());
+        category.setCreateUser(ThreadLocalUtil.getCurrentId());
         categoryMapper.insert(category);
     }
 
