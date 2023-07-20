@@ -32,10 +32,8 @@ public class Setmeal implements Serializable {
 
     //状态 0:停用 1:启用
     private Integer status;
-
     //描述信息
     private String description;
-
     //图片
     private String image;
 

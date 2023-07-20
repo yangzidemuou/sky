@@ -2,12 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.setmealMapper">
+    <insert id="add">
+        insert into setmeal
+        <where></where>
 
-    <select id="pageQuery" resultType="com.sky.dto.SetmealDTO">
-        select * from setmeal
-        <where>
-            <if test="name !=null"> and name like concat('%',#{name},'%')</if>
-        </where>
+    </insert>
+
+    <select id="pageQuery" resultType="com.sky.vo.SetmealVO">
+        select category.name as category_name,setmeal.* from setmeal,category
+        where category.id=setmeal.category_id
         order by create_time desc
     </select>
 </mapper>
