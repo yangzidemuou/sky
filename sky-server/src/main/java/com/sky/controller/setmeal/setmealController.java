@@ -21,6 +21,7 @@ public class setmealController {
     @GetMapping("/page")
     @ApiOperation("套餐分页查询")
     private Result<PageResult> page(SetmealPageDTO setmealPageDTO){
+        log.info("套餐分类查询:{}",setmealPageDTO);
         PageResult pageResult = setmealService.page(setmealPageDTO);
         return   Result.success(pageResult);
     }

@@ -1,7 +1,6 @@
 package com.sky.dto;
 
 import lombok.Data;
-
 @Data
 public class SetmealPageDTO {
     private Integer page = 1;
