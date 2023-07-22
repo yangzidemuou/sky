@@ -5,16 +5,16 @@
     <update id="update">
         update dish
         <set>
-            <if test="name !=null">set name=#{name},</if>
-            <if test="categoryId !=null">set category_id=#{categoryId},</if>
-            <if test="price !=null">set price=#{price},</if>
-            <if test="image !=null">set image=#{image},</if>
-            <if test="description !=null">set description=#{description},</if>
-            <if test="status !=null">set status=#{status},</if>
-            <if test="createTime !=null">set create_time=#{createTime},</if>
-            <if test="createUser !=null">set create_user=#{createUser},</if>
-            <if test="updateTime !=null">set update_time=#{updateTime},</if>
-            <if test="updateUser !=null">set update_user=#{updateUser},</if>
+            <if test="name !=null">name=#{name},</if>
+            <if test="categoryId !=null">category_id=#{categoryId},</if>
+            <if test="price !=null">price=#{price},</if>
+            <if test="image !=null">image=#{image},</if>
+            <if test="description !=null">description=#{description},</if>
+            <if test="status !=null">status=#{status},</if>
+            <if test="createTime !=null">create_time=#{createTime},</if>
+            <if test="createUser !=null">create_user=#{createUser},</if>
+            <if test="updateTime !=null">update_time=#{updateTime},</if>
+            <if test="updateUser !=null">update_user=#{updateUser},</if>
         </set>
         where id=#{id}
     </update>

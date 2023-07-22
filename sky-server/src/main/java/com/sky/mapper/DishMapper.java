@@ -15,6 +15,10 @@ public interface DishMapper {
      */
     Page<DishVO> pageQuery(DishPageDTO dishPageDTO);
 
+    /**
+     * 跟新菜品状态
+     * @param dish
+     */
     void update(Dish dish);
 
 }
