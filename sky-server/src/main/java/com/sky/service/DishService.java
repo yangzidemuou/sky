@@ -1,7 +1,10 @@
 package com.sky.service;
 
 import com.sky.dto.DishPageDTO;
+import com.sky.entity.Dish;
 import com.sky.result.PageResult;
+
+import java.util.List;
 
 public interface DishService {
     /**
@@ -17,4 +20,6 @@ public interface DishService {
      * @param id
      */
     void startAndStopDish(Integer status, Long id);
+
+    List<Dish> selectByTypeDish(Integer categoryId);
 }

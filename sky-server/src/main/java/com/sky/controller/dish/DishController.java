@@ -1,6 +1,7 @@
 package com.sky.controller.dish;
 
 import com.sky.dto.DishPageDTO;
+import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
@@ -10,6 +11,8 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 分类管理
@@ -27,7 +30,7 @@ public class DishController {
     @GetMapping("/page")
     @ApiOperation("分页查询菜品数据")
     private Result<PageResult> page(DishPageDTO dishPageDTO){
-        log.info("分页查询菜品数据");
+        log.info("分页查询菜品数据:{}",dishPageDTO);
         PageResult pageResult=dishService.page(dishPageDTO);
         return Result.success(pageResult);
     }
@@ -44,6 +47,14 @@ public class DishController {
         log.info("菜品起售停售：{}  {}",status,id);
         dishService.startAndStopDish(status,id);
         return Result.success();
+    }
+
+    @GetMapping("/list")
+    @ApiOperation("根据type查询菜品")
+    private Result<List<Dish>> selectByTypeDish(Integer categoryId){
+        log.info("根据菜品分类id查询菜品：{}",categoryId);
+        List<Dish> dishes=dishService.selectByTypeDish(categoryId);
+        return  Result.success(dishes);
     }
 
 

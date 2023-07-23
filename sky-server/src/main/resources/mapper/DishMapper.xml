@@ -22,10 +22,10 @@
     <select id="pageQuery" resultType="com.sky.vo.DishVO">
         select dish.*,category.name as categoryName from dish,category
         <where>
-            <if test="name !=null">and name like concat('%',#{name},'%'),</if>
-            <if test="categoryId !=null">and category_id=#{categoryId}, </if>
-            <if test="status !=null">and status=#{status},</if>
-            and category.id=dish.category_id
+            dish.category_id=category.id
+            <if test="name !=null">and dish.name like concat('%',#{name},'%')</if>
+            <if test="categoryId !=null">and dish.category_id=#{categoryId} </if>
+            <if test="status !=null">and dish.status=#{status}</if>
         </where>
         order by create_time desc
     </select>

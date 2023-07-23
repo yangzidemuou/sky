@@ -48,4 +48,15 @@ public class DishServiceImpl implements DishService {
         dish.setUpdateUser(ThreadLocalUtil.getCurrentId());
         dishMapper.update(dish);
     }
+
+    /**
+     * 根据菜品分类id查询
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Dish> selectByTypeDish(Integer categoryId) {
+        List<Dish> dishes=dishMapper.selectByType(categoryId);
+        return dishes;
+    }
 }
