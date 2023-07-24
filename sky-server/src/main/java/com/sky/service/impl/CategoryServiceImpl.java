@@ -95,11 +95,10 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public List<Category> selectCategoryByType(Integer type) {
-        CategoryDTO categoryDTO=new CategoryDTO();
-        categoryDTO.setType(type);
-        PageHelper.startPage(categoryDTO.getPage(),categoryDTO.getPageSize());
-        Page<Category> page=categoryMapper.pageQuery(categoryDTO);
-        List<Category> records = page.getResult();
-        return records;
+
+
+        List<Category> list=categoryMapper.selectCategoryByType(type);
+
+        return list;
     }
 }

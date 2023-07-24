@@ -25,5 +25,15 @@ public interface DishMapper {
     void update(Dish dish);
     @Select("select * from dish where category_id=#{categoryId}")
     List<Dish> selectByType(Integer categoryId);
+
+    /**
+     * 通过菜品id获取菜品信息
+     * @param id
+     * @return
+     */
+    @Select("select * from dish where id=#{id}")
+    List<DishVO> selectById(Long id);
+
+
 }
 

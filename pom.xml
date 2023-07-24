@@ -47,6 +47,15 @@
                 <version>${lombok.version}</version>
             </dependency>
 
+
+            <!-- https://mvnrepository.com/artifact/com.huaweicloud/esdk-obs-java-bundle -->
+            <dependency>
+                <groupId>com.huaweicloud</groupId>
+                <artifactId>esdk-obs-java-bundle</artifactId>
+                <version>3.23.3</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>

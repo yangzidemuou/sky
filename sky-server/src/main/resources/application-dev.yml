@@ -6,3 +6,13 @@ sky:
     database: sky_take_out
     username: root
     password: yangzidemuou521-
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tPNvGs3sxafCTJBSHdd
+    access-key-secret: 8qYDdqCgqrHlft6FNy9QGzgQNXuBEd
+    bucket-name: sky-heima
+  huaweiobs:
+    endpoint: obs.cn-south-1.myhuaweicloud.com
+    access-key-id: THE2LHNGEV4M14NLWFYE
+    access-key-secret: 78ZBTPWP6EqtmDpkOmc4lEPjnxi44n2fraCq5ehC
+    bucket-name: sky-take

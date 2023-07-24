@@ -56,7 +56,25 @@ public class DishServiceImpl implements DishService {
      */
     @Override
     public List<Dish> selectByTypeDish(Integer categoryId) {
-        List<Dish> dishes=dishMapper.selectByType(categoryId);
-        return dishes;
+        return dishMapper.selectByType(categoryId);
+    }
+
+    /**
+     * 通过菜品id获取菜品信息
+     * @param id
+     * @return
+     */
+    @Override
+    public List<DishVO> selectByIdDish(Long id) {
+        return dishMapper.selectById(id);
+    }
+
+    /**
+     * 新增菜品
+     * @param dishVO
+     */
+    @Override
+    public void addDish(DishVO dishVO) {
+        System.out.println(dishVO);
     }
 }

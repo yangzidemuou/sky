@@ -5,6 +5,7 @@ import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
+import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.models.security.SecurityScheme;
@@ -49,12 +50,36 @@ public class DishController {
         return Result.success();
     }
 
+    /**
+     * 根据type查询菜品信息
+     * @param categoryId
+     * @return
+     */
     @GetMapping("/list")
     @ApiOperation("根据type查询菜品")
     private Result<List<Dish>> selectByTypeDish(Integer categoryId){
         log.info("根据菜品分类id查询菜品：{}",categoryId);
         List<Dish> dishes=dishService.selectByTypeDish(categoryId);
         return  Result.success(dishes);
+    }
+
+    /**
+     * 根据id查询菜品信息
+     * @param id
+     * @return
+     */
+    @GetMapping("{id}")
+    private Result<List<DishVO>> selectByIdDish(@PathVariable Long id){
+        log.info("根据id查询菜品信息：{}",id);
+        List<DishVO> dishVOS=dishService.selectByIdDish(id);
+        return Result.success(dishVOS);
+    }
+    @PostMapping
+    @ApiOperation("新增菜品")
+    private Result addDish(@RequestBody DishVO dishVO){
+        log.info("新增菜品：{}",dishVO);
+
+        return Result.success();
     }
 
 
