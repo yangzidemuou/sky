@@ -9,10 +9,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @Slf4j
 @RestController
 @RequestMapping("/admin/setmeal")
@@ -29,9 +27,17 @@ public class setmealController {
     }
 
 
+    @PostMapping
+    @ApiOperation("新增套餐")
     private Result add(@RequestBody SetmealDTO setmealDTO){
         log.info("新增套餐：{}",setmealDTO);
         setmealService.add(setmealDTO);
+        return Result.success();
+    }
+    @PostMapping("/status/{status}")
+    private Result changeStatus(@PathVariable Integer status,Long id){
+        log.info("修改状态：{}，{}",status,id);
+        setmealService.changeStatus(status,id);
         return Result.success();
     }
 }

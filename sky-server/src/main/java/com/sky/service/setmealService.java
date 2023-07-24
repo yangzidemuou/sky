@@ -4,6 +4,7 @@ package com.sky.service;
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageDTO;
 import com.sky.result.PageResult;
+import io.swagger.models.auth.In;
 
 public interface setmealService {
     /**
@@ -18,4 +19,6 @@ public interface setmealService {
      * @param setmealDTO
      */
     void add(SetmealDTO setmealDTO);
+
+    void changeStatus(Integer status, Long id);
 }

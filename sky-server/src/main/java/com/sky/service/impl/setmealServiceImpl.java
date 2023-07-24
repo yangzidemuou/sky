@@ -1,16 +1,21 @@
 package com.sky.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.sky.context.ThreadLocalUtil;
 import com.sky.dto.SetmealDTO;
 import com.sky.dto.SetmealPageDTO;
 import com.sky.entity.Setmeal;
+import com.sky.entity.SetmealDish;
 import com.sky.mapper.setmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.setmealService;
 import com.sky.vo.SetmealVO;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 /**
  * 套餐接口实现
@@ -40,6 +45,37 @@ public class setmealServiceImpl implements setmealService{
      */
     @Override
     public void add(SetmealDTO setmealDTO) {
-        setmealMapper.add(setmealDTO);
+        Setmeal setmeal=new Setmeal();
+        BeanUtils.copyProperties(setmealDTO,setmeal);
+
+        setmeal.setCreateTime(LocalDateTime.now());
+        setmeal.setCreateUser(ThreadLocalUtil.getCurrentId());
+
+        List<SetmealDish> setmealDishes=setmealDTO.getSetmealDishes();
+
+        setmealMapper.addSetmeal(setmeal);
+
+        Long setmealId=setmeal.getId();
+
+        setmealDishes.forEach(setmealDish -> {
+            setmealDish.setSetmealId(setmealId);
+        });
+
+        setmealMapper.addSetmealDish(setmealDishes);
+    }
+
+    /**
+     * 修改套餐状态
+     * @param status
+     * @param id
+     */
+    @Override
+    public void changeStatus(Integer status, Long id) {
+        Setmeal setmeal=new Setmeal();
+        setmeal.setStatus(status);
+        setmeal.setId(id);
+        setmeal.setUpdateTime(LocalDateTime.now());
+        setmeal.setUpdateUser(ThreadLocalUtil.getCurrentId());
+        setmealMapper.update(setmeal);
     }
 }
