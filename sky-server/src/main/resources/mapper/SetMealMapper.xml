@@ -19,11 +19,80 @@
     <update id="update">
         update setmeal
         <set>
-            <if test="name !=null">name=#{name}</if>
-            <if test="status !=null">status=#{status}</if>
+            <if test="name !=null">name=#{name},</if>
+            <if test="status !=null">status=#{status},</if>
+            <if test="categoryId !=null">category_id=#{categoryId},</if>
+            <if test="price !=null">price=#{price},</if>
+            <if test="description !=null">description=#{description},</if>
+            <if test="image !=null">image=#{image},</if>
+            <if test="createTime !=null">create_time=#{createTime},</if>
+            <if test="updateTime !=null">update_time=#{updateTime},</if>
+            <if test="createUser !=null">create_user=#{createUser},</if>
+            <if test="updateUser !=null">updateUser=#{updateUser},</if>
         </set>
         where id=#{id}
     </update>
+
+
+    <update id="updateSetmealDish" parameterType="java.util.List">
+        update setmeal_dish
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="setmeal_id =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.setmealId !=null">
+                        when id=#{item.id} then #{item.setmealId}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="dish_id =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.dishId !=null">
+                        when id=#{item.id} then #{item.dishId}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="name =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.name !=null">
+                        when id=#{item.id} then #{item.name}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="price =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.price !=null">
+                        when id=#{item.id} then #{item.price}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="copies =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.copies !=null">
+                        when id=#{item.id} then #{item.copies}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
+    </update>
+    <delete id="delete">
+        delete from setmeal
+        where id in
+        <foreach collection="ids" index="index" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+
+
+    </delete>
+    <delete id="deleteSetmealDish">
+        delete from setmeal_dish where setmeal_id in
+        <foreach collection="ids" index="index" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 
     <select id="pageQuery" resultType="com.sky.vo.SetmealVO">
         select category.name as category_name,setmeal.* from setmeal,category
