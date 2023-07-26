@@ -78,7 +78,12 @@ public class DishController {
     @ApiOperation("新增菜品")
     private Result addDish(@RequestBody DishVO dishVO){
         log.info("新增菜品：{}",dishVO);
-
+        dishService.addDish(dishVO);
+        return Result.success();
+    }
+    @DeleteMapping
+    private Result deleteBatch(Long[] ids){
+        dishService.deleteBatch(ids);
         return Result.success();
     }
 

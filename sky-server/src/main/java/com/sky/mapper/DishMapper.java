@@ -3,6 +3,7 @@ package com.sky.mapper;
 import com.github.pagehelper.Page;
 import com.sky.dto.DishPageDTO;
 import com.sky.entity.Dish;
+import com.sky.entity.DishFlavor;
 import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -34,6 +35,14 @@ public interface DishMapper {
     @Select("select * from dish where id=#{id}")
     List<DishVO> selectById(Long id);
 
+
+    void addDish(Dish dish);
+
+    void addDishFlavors(List<DishFlavor> dishFlavors);
+
+    void deleteBatch(Long[] ids);
+
+    void deleteDishFlavorBatch(Long[] ids);
 
 }
 

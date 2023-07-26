@@ -41,4 +41,6 @@ public interface DishService {
      * @param dishVO
      */
     void addDish(DishVO dishVO);
+
+    void deleteBatch(Long[] ids);
 }

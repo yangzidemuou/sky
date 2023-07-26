@@ -5,10 +5,13 @@ import com.github.pagehelper.PageHelper;
 import com.sky.context.ThreadLocalUtil;
 import com.sky.dto.DishPageDTO;
 import com.sky.entity.Dish;
+import com.sky.entity.DishFlavor;
 import com.sky.mapper.DishMapper;
 import com.sky.result.PageResult;
+import com.sky.result.Result;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,5 +79,38 @@ public class DishServiceImpl implements DishService {
     @Override
     public void addDish(DishVO dishVO) {
         System.out.println(dishVO);
+
+        Dish dish=new Dish();
+        BeanUtils.copyProperties(dishVO,dish);
+
+        dish.setCreateTime(LocalDateTime.now());
+        dish.setCreateUser(ThreadLocalUtil.getCurrentId());
+
+        dishMapper.addDish(dish);
+
+
+
+        List<DishFlavor> dishFlavors=dishVO.getFlavors();
+
+        dishFlavors.forEach(dishFlavor -> {
+            dishFlavor.setDishId(dish.getId());
+        });
+
+        dishMapper.addDishFlavors(dishFlavors);
+
+    }
+
+    @Override
+    public void deleteBatch(Long[] ids) {
+        if (ids.length>0){
+            dishMapper.deleteBatch(ids);
+
+            dishMapper.deleteDishFlavorBatch(ids);
+        }
+        else {
+            System.out.println("ids异常");
+        }
+
+
     }
 }
