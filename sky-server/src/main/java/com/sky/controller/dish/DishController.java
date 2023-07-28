@@ -86,6 +86,12 @@ public class DishController {
         dishService.deleteBatch(ids);
         return Result.success();
     }
+    @PutMapping
+    @ApiOperation("修改套餐")
+    private Result changeDish(@RequestBody DishVO dishVO){
+        dishService.changeDish(dishVO);
+        return Result.success();
+    }
 
 
 }

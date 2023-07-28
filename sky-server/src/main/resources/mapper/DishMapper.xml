@@ -30,6 +30,38 @@
         where id=#{id}
     </update>
 
+    <update id="updateDishFlavor" parameterType="java.util.List">
+        update dish_flavor
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="dish_id =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.dishId !=null">
+                        when id=#{item.id} then #{item.dishId}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="name =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.name !=null">
+                        when id=#{item.id} then #{item.name}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="value =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    <if test="item.value !=null">
+                        when id=#{item.id} then #{item.value}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where dish_id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id}
+        </foreach>
+
+    </update>
+
     <delete id="deleteBatch" parameterType="java.util.List">
         delete from dish where id in
         <foreach collection="ids" separator="," item="item" open="(" close=")">
@@ -54,7 +86,5 @@
         </where>
         order by create_time desc
     </select>
-
-
 
 </mapper>

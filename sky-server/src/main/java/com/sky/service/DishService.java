@@ -43,4 +43,7 @@ public interface DishService {
     void addDish(DishVO dishVO);
 
     void deleteBatch(Long[] ids);
+
+    void changeDish(DishVO dishVO);
+
 }

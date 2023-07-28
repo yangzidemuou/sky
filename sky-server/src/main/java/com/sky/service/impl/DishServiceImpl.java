@@ -88,8 +88,6 @@ public class DishServiceImpl implements DishService {
 
         dishMapper.addDish(dish);
 
-
-
         List<DishFlavor> dishFlavors=dishVO.getFlavors();
 
         dishFlavors.forEach(dishFlavor -> {
@@ -104,13 +102,26 @@ public class DishServiceImpl implements DishService {
     public void deleteBatch(Long[] ids) {
         if (ids.length>0){
             dishMapper.deleteBatch(ids);
-
             dishMapper.deleteDishFlavorBatch(ids);
         }
         else {
-            System.out.println("ids异常");
+            throw new RuntimeException();
         }
+    }
 
+    @Override
+    public void changeDish(DishVO dishVO) {
+
+        Dish dish=new Dish();
+        BeanUtils.copyProperties(dishVO,dish);
+
+        dish.setUpdateTime(LocalDateTime.now());
+        dish.setUpdateUser(ThreadLocalUtil.getCurrentId());
+
+        dishMapper.update(dish);
+
+        List<DishFlavor> dishFlavors=dishVO.getFlavors();
+        dishMapper.updateDishFlavor(dishFlavors);
 
     }
 }
