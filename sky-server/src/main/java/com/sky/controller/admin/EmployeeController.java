@@ -45,9 +45,13 @@ public class EmployeeController {
         EmployeeLoginVO vo = BeanUtil.copyProperties(employee,EmployeeLoginVO.class);
 
         HashMap<String,Object> map = new HashMap<>();
+
         map.put("empId",employee.getId());
+
         String token= JwtUtil.createJWT(jwtProperties.getAdminSecret(),map);
+
         vo.setToken(token);
+
         return Result.success(vo);
     }
 
