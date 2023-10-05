@@ -34,15 +34,12 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
-
+        <!--华为obs-->
         <!-- https://mvnrepository.com/artifact/com.huaweicloud/esdk-obs-java-bundle -->
         <dependency>
             <groupId>com.huaweicloud</groupId>
             <artifactId>esdk-obs-java-bundle</artifactId>
         </dependency>
-
-
-
         <!--JWT-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -55,10 +52,6 @@
             <optional>true</optional>
         </dependency>
         <!--阿里云OSS-->
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-        </dependency>
         <!--微信支付-->
         <dependency>
             <groupId>com.github.wechatpay-apiv3</groupId>

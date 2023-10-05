@@ -12,7 +12,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-    //要处理的异常
+    //要处理的异常，要处理的自定义业务异常
     @ExceptionHandler(BusinessException.class)
     public Result handlerBusinessException(BusinessException e){
         //1. 记录日志-开发看
@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
         //2. 返回友好提示-用户看
         return Result.error(e.getCode(),e.getMessage());
     }
-
+    //数据操作时违反完整性唯一约束异常
     @ExceptionHandler
     public Result exceptionHandler(SQLIntegrityConstraintViolationException ex){
         String message = ex.getMessage();
@@ -34,6 +34,7 @@ public class GlobalExceptionHandler {
         }
     }
 
+    //向数据库插入异常
     @ExceptionHandler(DuplicateKeyException.class)
     public Result handlerDuplicateKeyException(DuplicateKeyException e){
         //1. 记录日志-开发看

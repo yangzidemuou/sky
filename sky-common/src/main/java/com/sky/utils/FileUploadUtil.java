@@ -3,6 +3,7 @@ package com.sky.utils;
 import com.obs.services.ObsClient;
 import com.obs.services.exception.ObsException;
 import com.obs.services.model.ObjectMetadata;
+import com.sky.exception.BusinessException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,6 +30,9 @@ public class FileUploadUtil {
         ObsClient obsClient = new ObsClient(accessKeyId, accessKeySecret, endpoint);
 
         String fileName = file.getOriginalFilename();
+        if(fileName == null){
+          throw new BusinessException(200,"上传文件名为空");
+        }
         InputStream inputStream=file.getInputStream();
 
         String objectName = "images/" + new SimpleDateFormat("yyyy/MM/dd").format(new Date())
@@ -51,7 +55,7 @@ public class FileUploadUtil {
                 .append("/")
                 .append(objectName);
 
-        log.info("文件上传到:{}", stringBuilder.toString());
+        log.info("文件上传到:{}", stringBuilder);
 
         return stringBuilder.toString();
 

@@ -2,7 +2,6 @@ package com.sky.controller.comment;
 
 import com.sky.exception.BusinessException;
 import com.sky.result.Result;
-import com.sky.utils.AliOssUtil;
 import com.sky.utils.FileUploadUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,8 +24,6 @@ import java.io.IOException;
 public class UploadController {
     @Autowired
     private FileUploadUtil fileUploadUtil;
-    @Autowired
-    private AliOssUtil aliOssUtil;
     @PostMapping("/upload")
     @ApiOperation("图片上传")
     private Result<String> upload(MultipartFile file){
@@ -35,7 +32,7 @@ public class UploadController {
             throw new BusinessException(400,"请选择正确的文件上传");
         }
         //2. 完成文件上传
-        String url = null;
+        String url;
         try {
             url = fileUploadUtil.upload(file);
         } catch (IOException e) {
