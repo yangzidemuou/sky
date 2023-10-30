@@ -8,9 +8,9 @@ import com.sky.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,13 +21,11 @@ import java.util.List;
 @RequestMapping("/admin/category")
 @Api("分类操作")
 public class categoryController {
-    @Autowired
+    @Resource
     private CategoryService categoryService;
 
     /**
      * 分页查询分类数据
-     * @param categoryDTO
-     * @return
      */
     @GetMapping("/page")
     @ApiOperation("分页查询分类数据")
@@ -39,12 +37,10 @@ public class categoryController {
 
     /**
      * 新增分类
-     * @param categoryDTO
-     * @return
      */
     @PostMapping
     @ApiOperation("添加分类")
-    public Result addCategory(@RequestBody CategoryDTO categoryDTO){
+    public Result<String> addCategory(@RequestBody CategoryDTO categoryDTO){
         log.info("新增分类:{}",categoryDTO);
         categoryService.addCategory(categoryDTO);
         return Result.success();
@@ -52,12 +48,10 @@ public class categoryController {
 
     /**
      * 修改分类
-     * @param categoryDTO
-     * @return
      */
     @PutMapping
     @ApiOperation("修改分类")
-    private Result changeCategory(@RequestBody CategoryDTO categoryDTO){
+    private Result<String> changeCategory(@RequestBody CategoryDTO categoryDTO){
         log.info("修改分类:{}",categoryDTO);
         categoryService.changeCategory(categoryDTO);
         return Result.success();
@@ -65,11 +59,10 @@ public class categoryController {
 
     /**
      * 修改分类状态
-     * @return
      */
     @PostMapping("status/{status}")
     @ApiOperation("分类状态修改")
-    private Result startAndStopCategory(@PathVariable Integer status,Long id){
+    private Result<String> startAndStopCategory(@PathVariable Integer status,Long id){
         log.info("启用禁用分类");
         categoryService.startAndStopCategory(status,id);
         return Result.success();
@@ -77,12 +70,10 @@ public class categoryController {
 
     /**
      * 根据id删除分类
-     * @param id
-     * @return
      */
     @DeleteMapping
     @ApiOperation("根据id删除分类")
-    private Result deleteCategory(Long id){
+    private Result<String> deleteCategory(Long id){
         log.info("根据id查询分类:{}",id);
         categoryService.deleteCategory(id);
         return Result.success();
@@ -90,8 +81,6 @@ public class categoryController {
 
     /**
      *
-     * @param type
-     * @return
      */
     @GetMapping("/list")
     @ApiOperation("根据id查询分类信息")

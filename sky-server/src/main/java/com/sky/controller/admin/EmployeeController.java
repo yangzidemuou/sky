@@ -1,6 +1,7 @@
 package com.sky.controller.admin;
 
 import cn.hutool.core.bean.BeanUtil;
+
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
@@ -10,11 +11,15 @@ import com.sky.result.Result;
 import com.sky.service.EmployeeService;
 import com.sky.utils.JwtUtil;
 import com.sky.vo.EmployeeLoginVO;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 import java.util.HashMap;
 /**
  * 员工管理
@@ -24,16 +29,14 @@ import java.util.HashMap;
 @RequestMapping("/admin/employee")
 @Api("用户操作")
 public class EmployeeController {
-    @Autowired
+    @Resource
     private EmployeeService employeeService;
 
-    @Autowired
+    @Resource
     JwtProperties jwtProperties;
 
     /**
      * 员工登录
-     * @param employeeDTO
-     * @return
      */
     @PostMapping("/login")
     @ApiOperation("员工登录")
@@ -57,7 +60,6 @@ public class EmployeeController {
 
     /**
      * 员工退出
-     * @return
      */
     @PostMapping("/logout")
     @ApiOperation("员工退出")
@@ -67,8 +69,6 @@ public class EmployeeController {
 
     /**
      * 新增员工
-     * @param employeeDTO
-     * @return
      */
     @PostMapping
     @ApiOperation("新增员工")
@@ -80,8 +80,6 @@ public class EmployeeController {
 
     /**
      * 员工分页查询
-     * @param employeePageQueryDTO
-     * @return
      */
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
@@ -93,13 +91,10 @@ public class EmployeeController {
 
     /**
      * 员工状态修改
-     * @param status
-     * @param id
-     * @return
      */
     @PostMapping("status/{status}")
     @ApiOperation("员工状态修改")
-    public Result statusEmployee(@PathVariable Integer status,Long id){
+    public Result<String> statusEmployee(@PathVariable Integer status,Long id){
         log.info("员工状态修改");
         employeeService.StatusChange(status,id);
         return Result.success();
@@ -107,8 +102,6 @@ public class EmployeeController {
 
     /**
      * 按id查询员工信息
-     * @param id
-     * @return
      */
     @GetMapping("/{id}")
     @ApiOperation("根据id查询员工")
@@ -120,19 +113,17 @@ public class EmployeeController {
 
     /**
      * 编辑员工信息
-     * @param employeeDTO
-     * @return
      */
     @PutMapping("/editPassword")
     @ApiOperation("修改员工信息")
-    public Result update(@RequestBody EmployeeDTO employeeDTO){
+    public Result<String> update(@RequestBody EmployeeDTO employeeDTO){
         log.info("编辑员工信息:{}",employeeDTO);
         employeeService.update(employeeDTO);
         return Result.success();
     }
     @PutMapping
     @ApiOperation("修改员工密码")
-    public Result updatePassword(@RequestBody EmployeeDTO employeeDTO){
+    public Result<String> updatePassword(@RequestBody EmployeeDTO employeeDTO){
         log.info("编辑员工密码：{}",employeeDTO);
         employeeService.updatePassword(employeeDTO);
         return Result.success();

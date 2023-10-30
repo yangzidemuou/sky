@@ -8,11 +8,10 @@ import com.sky.service.DishService;
 import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,7 +23,7 @@ import java.util.List;
 @Api("菜品相关操作")
 public class DishController {
 
-    @Autowired
+    @Resource
     private DishService dishService;
 
 
@@ -38,13 +37,10 @@ public class DishController {
 
     /**
      * 菜品起售停售
-     * @param status
-     * @param id
-     * @return
      */
     @PostMapping("/status/{status}")
     @ApiOperation("菜品起售停售")
-    private Result startAndStopDish(@PathVariable Integer status,Long id){
+    private Result<String> startAndStopDish(@PathVariable Integer status,Long id){
         log.info("菜品起售停售：{}  {}",status,id);
         dishService.startAndStopDish(status,id);
         return Result.success();
@@ -52,8 +48,6 @@ public class DishController {
 
     /**
      * 根据type查询菜品信息
-     * @param categoryId
-     * @return
      */
     @GetMapping("/list")
     @ApiOperation("根据type查询菜品")
@@ -65,8 +59,6 @@ public class DishController {
 
     /**
      * 根据id查询菜品信息
-     * @param id
-     * @return
      */
     @GetMapping("{id}")
     private Result<List<DishVO>> selectByIdDish(@PathVariable Long id){
@@ -76,19 +68,19 @@ public class DishController {
     }
     @PostMapping
     @ApiOperation("新增菜品")
-    private Result addDish(@RequestBody DishVO dishVO){
+    private Result<String> addDish(@RequestBody DishVO dishVO){
         log.info("新增菜品：{}",dishVO);
         dishService.addDish(dishVO);
         return Result.success();
     }
     @DeleteMapping
-    private Result deleteBatch(Long[] ids){
+    private Result<String> deleteBatch(Long[] ids){
         dishService.deleteBatch(ids);
         return Result.success();
     }
     @PutMapping
     @ApiOperation("修改套餐")
-    private Result changeDish(@RequestBody DishVO dishVO){
+    private Result<String> changeDish(@RequestBody DishVO dishVO){
         dishService.changeDish(dishVO);
         return Result.success();
     }

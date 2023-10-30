@@ -9,15 +9,16 @@ import com.sky.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 @Slf4j
 @RestController
 @RequestMapping("/admin/setmeal")
 @Api("套餐操作")
 public class setmealController {
-    @Autowired
+    @Resource
     private setmealService setmealService;
     @GetMapping("/page")
     @ApiOperation("套餐分页查询")
@@ -30,7 +31,7 @@ public class setmealController {
 
     @PostMapping
     @ApiOperation("新增套餐")
-    private Result add(@RequestBody SetmealDTO setmealDTO){
+    private Result<String> add(@RequestBody SetmealDTO setmealDTO){
         log.info("新增套餐：{}",setmealDTO);
         setmealService.add(setmealDTO);
         return Result.success();
@@ -38,14 +39,14 @@ public class setmealController {
 
 
     @PostMapping("/status/{status}")
-    private Result changeStatus(@PathVariable Integer status,Long id){
+    private Result<String> changeStatus(@PathVariable Integer status,Long id){
         log.info("修改状态：{}，{}",status,id);
         setmealService.changeStatus(status,id);
         return Result.success();
     }
     @PutMapping
     @ApiOperation("套餐修改")
-    private Result update(@RequestBody SetmealDTO setmealDTO){
+    private Result<String> update(@RequestBody SetmealDTO setmealDTO){
 
         log.info("套餐修改：{}",setmealDTO);
 
@@ -62,7 +63,7 @@ public class setmealController {
     }
     @DeleteMapping
     @ApiOperation("批量删除套餐")
-    private Result Delete(Long[] ids){
+    private Result<String> Delete(Long[] ids){
         log.info("批量删除套餐：{}", (Object) ids);
 
         setmealService.delete(ids);
