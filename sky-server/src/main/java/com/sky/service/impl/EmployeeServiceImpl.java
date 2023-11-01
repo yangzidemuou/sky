@@ -37,8 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new BusinessException(500,"账号不存在");
         }
 
-        if(!SecureUtil.md5(password).equals(employee.getPassword())){
-
+        if(!SecureUtil.md5(password).equals(SecureUtil.md5(employee.getPassword()))){
             throw new BusinessException(500,"密码错误");
         }
         if(Objects.equals(employee.getStatus(), StatusConstant.DISABLE)){

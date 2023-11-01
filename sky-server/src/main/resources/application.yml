@@ -12,6 +12,10 @@ spring:
       url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${sky.datasource.username}
       password: ${sky.datasource.password}
+      # redis配置
+  redis:
+    host: localhost
+    port: 6379
 mybatis:
   #mapper配置文件
   mapper-locations: classpath:mapper/*.xml
@@ -21,18 +25,33 @@ mybatis:
     map-underscore-to-camel-case: true
     # 控制台打印SQL日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 sky:
   jwt:
     # 设置jwt签名加密时使用的秘钥
     admin-secret: itcast
+    # 设置jwt过期时间
     admin-ttl: 7200000
+    # 设置前端传递过来的令牌的名称
     admin-token-name: token
-  alioss:
-    endpoint: ${sky.alioss.endpoint}
-    access-key-id: ${sky.alioss.access-key-id}
-    access-key-secret: ${sky.alioss.access-key-secret}
-    bucket-name: ${sky.alioss.bucket-name}
+
+    # 用户端密钥配置
+    user-secret: yangzidemuou
+    user-ttl: 7200000
+    user-token-name: authentication
 
 
+
+  # 华为OBS配置
+  huaweiobs:
+    access-key-id: ${sky.huaweiobs.access-key-id}
+    endpoint: ${sky.huaweiobs.endpoint}
+    access-key-secret: ${sky.huaweiobs.access-key-secret}
+    bucket-name: ${sky.huaweiobs.bucket-name}
+
+  # 微信小程序配置
+  wechat:
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}
 
 

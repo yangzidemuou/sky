@@ -46,6 +46,7 @@ public interface DishMapper {
 
     void updateDishFlavor(List<DishFlavor> dishFlavors);
 
+    List<Dish> list(Dish dish);
 
 }
 

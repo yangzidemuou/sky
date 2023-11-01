@@ -10,4 +10,8 @@ public class StatusConstant {
 
     //禁用
     public static final Integer DISABLE = 0;
+
+
+    //微信登录失败
+    public static final Integer WX_LOGIN_ERROR = 500;
 }

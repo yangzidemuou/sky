@@ -6,6 +6,7 @@ import com.sky.context.ThreadLocalUtil;
 import com.sky.dto.DishPageDTO;
 import com.sky.entity.Dish;
 import com.sky.entity.DishFlavor;
+import com.sky.mapper.DishFlavorMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +25,8 @@ public class DishServiceImpl implements DishService {
 
     @Autowired
     private DishMapper dishMapper;
+    @Autowired
+    private DishFlavorMapper dishFlavorMapper;
     /**
      * 分页查询菜品数据
      * @param dishPageDTO
@@ -123,5 +127,23 @@ public class DishServiceImpl implements DishService {
         List<DishFlavor> dishFlavors=dishVO.getFlavors();
         dishMapper.updateDishFlavor(dishFlavors);
 
+    }
+
+    @Override
+    public List<DishVO> listWithFlavor(Dish dish) {
+
+        List<Dish> dishList =  dishMapper.list(dish);
+
+
+        List<DishVO> dishVOList=new ArrayList<>();
+
+        for (Dish d :dishList){
+            DishVO dishVO=new DishVO();
+            BeanUtils.copyProperties(d,dishVO);
+            List<DishFlavor> flavors=dishFlavorMapper.getByDishId(d.getId());
+            dishVO.setFlavors(flavors);
+            dishVOList.add(dishVO);
+        }
+        return dishVOList;
     }
 }
